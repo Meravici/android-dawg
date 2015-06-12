@@ -24,10 +24,6 @@ class Node
     this.value = value;
   }
 
-  private Node ()
-  {
-  }
-
   public Node findChild (char value)
   {
     if (null == child)

@@ -2,7 +2,7 @@
 
 package com.icantrap.collections.dawg;
 
-import org.apache.commons.io.LineIterator;
+//import org.apache.commons.io.LineIterator;
 
 import java.io.*;
 import java.util.*;
@@ -34,7 +34,7 @@ class DawgBuilder
     if ((null == word) || (word.length () < 2))
       return this;
 
-    word = word.toUpperCase ();
+    //word = word.toUpperCase ();
 
     char[] chars = word.toCharArray ();
     Node ptr = root;
@@ -99,7 +99,7 @@ class DawgBuilder
    * @return the builder
    * @see LineIterator
    */
-  public DawgBuilder add (LineIterator wordIter)
+  public DawgBuilder add (Iterator<String> wordIter)
   {
     while (wordIter.hasNext ())
       add (wordIter.next ());

@@ -1,15 +1,31 @@
 // LICENSE: GPLv3. http://www.gnu.org/licenses/gpl-3.0.txt
 package com.icantrap.collections.dawg;
 
-import com.icantrap.collections.Stack;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.regex.Pattern;
+
 import org.apache.commons.io.input.ReaderInputStream;
 import org.apache.commons.io.output.WriterOutputStream;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.time.StopWatch;
 
-import java.io.*;
-import java.util.*;
-import java.util.regex.Pattern;
+import com.icantrap.collections.Stack;
 
 /**
  * An implementation of a Directed Acycilic Word Graph.  This implementation is intended to be efficiently stored, loaded,
@@ -21,10 +37,6 @@ public class Dawg
   private static final Pattern PATTERN_REGEX = Pattern.compile ("\\$?[A-Z?]*\\$?");
 
   private int[] nodes;
-
-  private Dawg ()
-  {
-  }
 
   /**
    * Used by DawgBuilder to create a new Dawg instance from the backing int array.  Not for general use.  Use one of the
@@ -128,7 +140,7 @@ public class Dawg
     if ((null == word) || (word.length () < 2))
       return false;
 
-    char[] letters = word.toUpperCase ().toCharArray ();
+    char[] letters = word.toCharArray ();
 
     int ptr = nodes[0];
 
@@ -593,10 +605,6 @@ public class Dawg
    */
   private class PatternToken
   {
-    public PatternToken (char letter)
-    {
-      this.letter = letter;
-    }
 
     public PatternToken (char letter, boolean required)
     {
